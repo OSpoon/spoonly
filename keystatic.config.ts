@@ -3,7 +3,7 @@ import { config, fields, collection, singleton } from '@keystatic/core';
 export default config({
   storage: import.meta.env.DEV ? { kind: 'local' } : {
     kind: 'github',
-    repo: 'OSpoon/spoonly',
+    repo: 'ospoon/spoonly',
     clientId: 'Ov23liJDiZwZBc82iF1r',
   },
   collections: {
