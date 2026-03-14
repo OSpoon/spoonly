@@ -1,6 +1,6 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-// 严格判断生产环境（Netlify 部署环境下 import.meta.env.PROD 为 true）
+// 严格判断是否处于生产环境
 const isProd = import.meta.env.PROD;
 
 export default config({
