@@ -12,7 +12,6 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://spoonly.cn',
 	output: 'server',
 	adapter: netlify(),
 	integrations: [react(), keystatic()],
