@@ -1,0 +1,8 @@
+# 强制将 Keystatic API 发往后端处理函数
+/api/keystatic/* /.netlify/functions/entry 200!
+
+# 确保 Keystatic 的前端路由显示正确的 SPA 页面
+/keystatic/* /keystatic/index.html 200
+
+# 让 Astro 处理所有其他动态路由
+/* /.netlify/functions/entry 200
