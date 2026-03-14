@@ -1,13 +1,13 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-// 严格判断生产环境
-const isProd = import.meta.env.PROD;
+// 严格判断是否处于本地开发模式
+const isDev = import.meta.env.DEV;
 
 export default config({
-  storage: isProd ? {
+  storage: isDev ? { kind: 'local' } : {
     kind: 'github',
     repo: 'OSpoon/spoonly',
-  } : { kind: 'local' },
+  },
   collections: {
     blog: collection({
       label: 'Blog Posts',
