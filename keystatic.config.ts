@@ -1,6 +1,7 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-const isDev = import.meta.env.DEV;
+// 检查是否在本地开发模式或缺少 GitHub 凭证
+const isDev = import.meta.env.DEV || !import.meta.env.KEYSTATIC_GITHUB_CLIENT_ID;
 
 export default config({
   storage: isDev ? { kind: 'local' } : {
