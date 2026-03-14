@@ -1,5 +1,6 @@
 ---
 import settings from '../data/settings.json';
+import  Analytics  from '@vercel/analytics/astro';
 
 interface Props {
 	title?: string;
@@ -62,6 +63,8 @@ const dailyBgUrl = `url('${settings.backgroundImage || dynamicUnsplashUrl}')`;
 		<footer class="footer">
 			<p>&copy; {new Date().getFullYear()} {settings.siteName}. {settings.footerText}</p>
 		</footer>
+
+		<Analytics />
 
 		<script is:inline type="module">
 			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
