@@ -1,28 +1,35 @@
 {
-	"projects": [
-		{
-			"id": "nexquery-ai",
-			"name": "NexQuery-AI",
-			"description": "An AI-driven natural language interaction tool for secure, autonomous data consumption and analysis.",
-			"language": "Vue",
-			"url": "https://github.com/OSpoon/NexQuery-AI",
-			"stars": 120
-		},
-		{
-			"id": "extension-js",
-			"name": "extension.js",
-			"description": "A cross-browser extension framework.",
-			"language": "TypeScript",
-			"url": "https://github.com/extension-js/extension.js",
-			"stars": 85
-		},
-		{
-			"id": "var-conv",
-			"name": "var-conv",
-			"description": "A quick code variable name conversion tool for VSCode IDE.",
-			"language": "TypeScript",
-			"url": "https://github.com/OSpoon/var-conv",
-			"stars": 210
-		}
-	]
+  "projects": [
+    {
+      "id": "z-packer",
+      "name": "z-packer",
+      "description": "Pack your project into zip / tar / tar.gz, gitignore-aware, deploy-ready.",
+      "language": "Node.js",
+      "url": "https://github.com/OSpoon/z-packer"
+    },
+    {
+      "id": "nexquery-ai",
+      "name": "NexQuery-AI",
+      "description": "An AI-driven natural language interaction tool for secure, autonomous data consumption and analysis.",
+      "language": "Vue",
+      "url": "https://github.com/OSpoon/NexQuery-AI",
+      "stars": 120
+    },
+    {
+      "id": "extension-js",
+      "name": "extension.js",
+      "description": "A cross-browser extension framework.",
+      "language": "TypeScript",
+      "url": "https://github.com/extension-js/extension.js",
+      "stars": 85
+    },
+    {
+      "id": "var-conv",
+      "name": "var-conv",
+      "description": "A quick code variable name conversion tool for VSCode IDE.",
+      "language": "TypeScript",
+      "url": "https://github.com/OSpoon/var-conv",
+      "stars": 210
+    }
+  ]
 }
