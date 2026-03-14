@@ -90,12 +90,8 @@ const dailyBgUrl = `url('https://images.unsplash.com/photo-${imageId}?q=80&w=200
 		</script>
 		<script is:inline>
 			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on("init", user => {
-					if (!user) {
-						window.netlifyIdentity.on("login", () => {
-							document.location.href = "/admin/";
-						});
-					}
+				window.netlifyIdentity.on("login", () => {
+					document.location.href = "/admin/";
 				});
 			}
 		</script>
