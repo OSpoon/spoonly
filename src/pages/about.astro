@@ -1,9 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import aboutData from '../data/about.json';
-import { marked } from 'marked'; // Need to install this or use simple regex for basic bold/italic
+import { marked } from 'marked';
 
 const { intro, experience, skills, connect } = aboutData;
+
+// 确保 bio 是字符串并进行解析
+const bioHtml = typeof intro.bio === 'string' ? await marked.parse(intro.bio) : '';
 ---
 
 <Layout title="About">
@@ -13,10 +16,7 @@ const { intro, experience, skills, connect } = aboutData;
 	</header>
 
 	<section class="about-intro">
-		<div class="bio-text">
-			{intro.bio.map(paragraph => (
-				<p set:html={paragraph.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/_(.*?)_/g, '<em>$1</em>')} />
-			))}
+		<div class="bio-text" set:html={bioHtml}>
 		</div>
 	</section>
 

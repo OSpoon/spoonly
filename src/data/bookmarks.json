@@ -1,27 +1,29 @@
-[
-	{
-		"id": "design-inspiration",
-		"category": "Design & Inspiration",
-		"items": [
-			{ "id": "1", "name": "Linear", "url": "https://linear.app", "desc": "The benchmark for modern software design." },
-			{ "id": "2", "name": "Vercel", "url": "https://vercel.com", "desc": "Minimalist cloud platform for frontend development." },
-			{ "id": "3", "name": "Raycast Store", "url": "https://www.raycast.com/store", "desc": "Beautifully crafted community extensions." }
-		]
-	},
-	{
-		"id": "dev-tools",
-		"category": "Dev Tools",
-		"items": [
-			{ "id": "4", "name": "Astro Docs", "url": "https://docs.astro.build", "desc": "The framework that powers this site." },
-			{ "id": "5", "name": "Radix UI", "url": "https://www.radix-ui.com", "desc": "Unstyled, accessible components for React." }
-		]
-	},
-	{
-		"id": "ai",
-		"category": "Artificial Intelligence",
-		"items": [
-			{ "id": "6", "name": "Perplexity", "url": "https://www.perplexity.ai", "desc": "An AI-powered search engine that actually works." },
-			{ "id": "7", "name": "Mistral AI", "url": "https://mistral.ai", "desc": "Open and efficient language models from Europe." }
-		]
-	}
-]
+{
+	"bookmarks": [
+		{
+			"id": "design-inspiration",
+			"category": "Design & Inspiration",
+			"items": [
+				{ "id": "1", "name": "Linear", "url": "https://linear.app", "desc": "The benchmark for modern software design." },
+				{ "id": "2", "name": "Vercel", "url": "https://vercel.com", "desc": "Minimalist cloud platform for frontend development." },
+				{ "id": "3", "name": "Raycast Store", "url": "https://www.raycast.com/store", "desc": "Beautifully crafted community extensions." }
+			]
+		},
+		{
+			"id": "dev-tools",
+			"category": "Dev Tools",
+			"items": [
+				{ "id": "4", "name": "Astro Docs", "url": "https://docs.astro.build", "desc": "The framework that powers this site." },
+				{ "id": "5", "name": "Radix UI", "url": "https://www.radix-ui.com", "desc": "Unstyled, accessible components for React." }
+			]
+		},
+		{
+			"id": "ai",
+			"category": "Artificial Intelligence",
+			"items": [
+				{ "id": "6", "name": "Perplexity", "url": "https://www.perplexity.ai", "desc": "An AI-powered search engine that actually works." },
+				{ "id": "7", "name": "Mistral AI", "url": "https://mistral.ai", "desc": "Open and efficient language models from Europe." }
+			]
+		}
+	]
+}

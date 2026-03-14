@@ -1,0 +1,9 @@
+{
+	"siteName": "OSpoon",
+	"description": "Digital artisan building refined web experiences from Beijing. Focused on Vue.js, Angular, and Node.js.",
+	"social": {
+		"github": "https://github.com/OSpoon",
+		"email": "mailto:ospoon@example.com"
+	},
+	"footerText": "Built with elegance."
+}

@@ -13,27 +13,33 @@ const blog = defineCollection({
 });
 
 const bookmarks = defineCollection({
-	loader: file("src/data/bookmarks.json"),
+	loader: async () => {
+		const { bookmarks } = await import('./data/bookmarks.json');
+		return bookmarks.map(b => ({ id: b.id, ...b }));
+	},
 	schema: z.object({
 		id: z.string(),
 		category: z.string(),
 		items: z.array(z.object({
 			id: z.string(),
 			name: z.string(),
-			url: z.string().url(),
+			url: z.string(),
 			desc: z.string().optional()
 		}))
 	})
 });
 
 const projects = defineCollection({
-	loader: file("src/data/projects.json"),
+	loader: async () => {
+		const { projects } = await import('./data/projects.json');
+		return projects.map(p => ({ id: p.id, ...p }));
+	},
 	schema: z.object({
 		id: z.string(),
 		name: z.string(),
 		description: z.string(),
 		language: z.string(),
-		url: z.string().url(),
+		url: z.string(),
 		stars: z.number().optional()
 	})
 });

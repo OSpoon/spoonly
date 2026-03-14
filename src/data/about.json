@@ -2,10 +2,7 @@
 	"intro": {
 		"title": "The Architect",
 		"tagline": "Digital artisan building refined web experiences from Beijing.",
-		"bio": [
-			"I am **小鑫同学 (OSpoon)**, a front-end development engineer dedicated to the intersection of code and aesthetics. With a focus on *Vue.js*, *Angular*, and *Node.js*, I build tools that empower developers and simplify complex data.",
-			"My philosophy is simple: technology should be powerful yet invisible. Whether it's an AI interaction tool or a pixel-scaling engine, I strive for technical integrity and visual elegance."
-		]
+		"bio": "I am **小鑫同学 (OSpoon)**, a front-end development engineer dedicated to the intersection of code and aesthetics. With a focus on *Vue.js*, *Angular*, and *Node.js*, I build tools that empower developers and simplify complex data.\n\nMy philosophy is simple: technology should be powerful yet invisible. Whether it's an AI interaction tool or a pixel-scaling engine, I strive for technical integrity and visual elegance."
 	},
 	"experience": [
 		{

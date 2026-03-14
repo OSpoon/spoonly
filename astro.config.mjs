@@ -6,9 +6,19 @@ import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
+import keystatic from '@keystatic/astro';
+import react from '@astrojs/react';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
+	adapter: netlify(),
+	integrations: [react(), keystatic()],
+	vite: {
+		optimizeDeps: {
+			include: ['react', 'react-dom'],
+		},
+	},
 	markdown: {
 		syntaxHighlight: false, // Turn off syntax highlighting to prevent Shiki from messing with Mermaid
 		remarkPlugins: [remarkGfm, remarkMath],
