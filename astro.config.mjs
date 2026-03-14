@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
@@ -12,7 +11,6 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://spoonly.cn',
 	output: 'server',
 	adapter: netlify(),
 	integrations: [react(), keystatic()],
@@ -22,7 +20,7 @@ export default defineConfig({
 		},
 	},
 	markdown: {
-		syntaxHighlight: false, // Turn off syntax highlighting to prevent Shiki from messing with Mermaid
+		syntaxHighlight: false,
 		remarkPlugins: [remarkGfm, remarkMath],
 		rehypePlugins: [
 			rehypeSlug,
