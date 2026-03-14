@@ -4,6 +4,7 @@ export default config({
   storage: (process.env.NODE_ENV === 'production') ? {
     kind: 'github',
     repo: 'OSpoon/spoonly',
+    clientId: 'Ov23liJDiZwZBc82iF1r',
   } : { kind: 'local' },
   collections: {
     blog: collection({
