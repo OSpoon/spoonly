@@ -52,6 +52,12 @@ export default config({
       schema: {
         siteName: fields.text({ label: 'Site Name', defaultValue: 'OSpoon' }),
         description: fields.text({ label: 'Global SEO Description', multiline: true }),
+        backgroundImage: fields.image({
+          label: 'Custom Background Image',
+          directory: 'public/assets/site',
+          publicPath: '/assets/site/',
+          validation: { isRequired: false }
+        }),
         social: fields.object({
           github: fields.url({ label: 'GitHub URL' }),
           email: fields.url({ label: 'Email URL' }),
