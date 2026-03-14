@@ -1,11 +1,11 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
 export default config({
-  storage: (process.env.NODE_ENV === 'production') ? {
+  storage: import.meta.env.DEV ? { kind: 'local' } : {
     kind: 'github',
     repo: 'OSpoon/spoonly',
     clientId: 'Ov23liJDiZwZBc82iF1r',
-  } : { kind: 'local' },
+  },
   collections: {
     blog: collection({
       label: 'Blog Posts',
