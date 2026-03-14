@@ -1,17 +1,11 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-// 严格判断是否处于生产环境
-const isProd = import.meta.env.PROD;
-
 export default config({
-  storage: import.meta.env.DEV ? { kind: 'local' } : {
+  storage: (process.env.NODE_ENV === 'production') ? {
     kind: 'github',
     repo: 'OSpoon/spoonly',
-    clientId: 'Ov23liJDiZwZBc82iF1r',
-  },
+  } : { kind: 'local' },
   collections: {
-
-
     blog: collection({
       label: 'Blog Posts',
       slugField: 'title',
