@@ -34,7 +34,21 @@ const dailyBgUrl = `url('https://images.unsplash.com/photo-${imageId}?q=80&w=200
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
-		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+		<script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+		<script is:inline>
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", user => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					} else if (window.location.hash.includes("invite_token") || window.location.hash.includes("recovery_token")) {
+						// 如果带有令牌且已初始化，说明是从邮件过来的
+						document.location.href = "/admin/";
+					}
+				});
+			}
+		</script>
 	</head>
 	<body style={`--daily-bg: ${dailyBgUrl}`}>
 		<header class="header">
@@ -87,13 +101,6 @@ const dailyBgUrl = `url('https://images.unsplash.com/photo-${imageId}?q=80&w=200
 			};
 
 			renderMermaid();
-		</script>
-		<script is:inline>
-			if (window.netlifyIdentity) {
-				window.netlifyIdentity.on("login", () => {
-					document.location.href = "/admin/";
-				});
-			}
 		</script>
 	</body>
 </html>
