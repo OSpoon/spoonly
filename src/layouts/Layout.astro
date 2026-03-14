@@ -1,9 +1,11 @@
 ---
+import settings from '../data/settings.json';
+
 interface Props {
 	title?: string;
 }
 
-const { title = "OSpoon's Blog" } = Astro.props;
+const { title = settings.siteName } = Astro.props;
 
 // Curated list of minimalist ink-wash / zen style images from Unsplash
 const inkWashCollections = [
@@ -29,7 +31,7 @@ const dailyBgUrl = `url('https://images.unsplash.com/photo-${imageId}?q=80&w=200
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | OSpoon</title>
+		<title>{title} | {settings.siteName}</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -53,7 +55,7 @@ const dailyBgUrl = `url('https://images.unsplash.com/photo-${imageId}?q=80&w=200
 			<slot />
 		</main>
 		<footer class="footer">
-			<p>&copy; {new Date().getFullYear()} OSpoon. Built with elegance.</p>
+			<p>&copy; {new Date().getFullYear()} {settings.siteName}. {settings.footerText}</p>
 		</footer>
 
 		<script is:inline type="module">
