@@ -11,18 +11,12 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-	// 🚨 关键 1: 强制锁定站点域名和协议
-	site: 'https://spoonly.cn',
 	output: 'server',
 	adapter: netlify(),
 	integrations: [react(), keystatic()],
 	vite: {
 		optimizeDeps: {
 			include: ['react', 'react-dom', '@keystatic/core', '@keystatic/core/ui'],
-		},
-		// 🚨 关键 2: 确保服务端变量能够被正确解构
-		ssr: {
-			noExternal: ['@keystatic/core', '@keystatic/astro'],
 		},
 	},
 	markdown: {
