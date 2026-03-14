@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
@@ -129,6 +128,9 @@ const allProjects = projectsCollection.map(p => p.data);
 	.dot.vue { background-color: #41b883; }
 	.dot.typescript { background-color: #3178c6; }
 	.dot.javascript { background-color: #f1e05a; }
+	.dot.node\.js { background-color: #339933; }
+	.dot.go { background-color: #00add8; }
+	.dot.css { background-color: #563d7c; }
 	.dot.html { background-color: #e34c26; }
 
 	.star-icon {

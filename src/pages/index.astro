@@ -1,14 +1,15 @@
 ---
-export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 3);
+const posts = (await getCollection('blog'))
+	.filter(post => !post.data.isDraft)
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
 
 const projectsCollection = await getCollection('projects');
-const projects = projectsCollection.slice(0, 3).map(p => p.data);
+// Keep original JSON order
+const projects = projectsCollection.map(p => p.data).slice(0, 3);
 ---
 
 <Layout title="Home">
@@ -198,6 +199,10 @@ const projects = projectsCollection.slice(0, 3).map(p => p.data);
 	.dot.vue { background-color: #41b883; }
 	.dot.typescript { background-color: #3178c6; }
 	.dot.javascript { background-color: #f1e05a; }
+	.dot.node\.js { background-color: #339933; }
+	.dot.go { background-color: #00add8; }
+	.dot.css { background-color: #563d7c; }
+	.dot.html { background-color: #e34c26; }
 
 	.posts-list {
 		display: flex;
