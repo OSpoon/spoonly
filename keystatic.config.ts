@@ -1,6 +1,6 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 
-// 严格判断是否处于生产环境
+// 严格判断生产环境
 const isProd = import.meta.env.PROD;
 
 export default config({
@@ -9,6 +9,7 @@ export default config({
     repo: 'OSpoon/spoonly',
   } : { kind: 'local' },
   collections: {
+
     blog: collection({
       label: 'Blog Posts',
       slugField: 'title',
