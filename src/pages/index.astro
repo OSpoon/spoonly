@@ -8,8 +8,11 @@ const posts = (await getCollection('blog'))
 	.slice(0, 3);
 
 const projectsCollection = await getCollection('projects');
-// Keep original JSON order
-const projects = projectsCollection.map(p => p.data).slice(0, 3);
+// Sort by our custom _order field to maintain JSON physical order
+const projects = projectsCollection
+	.map(p => p.data)
+	.sort((a, b) => (a._order || 0) - (b._order || 0))
+	.slice(0, 3);
 ---
 
 <Layout title="Home">

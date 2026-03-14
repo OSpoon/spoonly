@@ -15,11 +15,13 @@ const blog = defineCollection({
 const bookmarks = defineCollection({
 	loader: async () => {
 		const { bookmarks } = await import('./data/bookmarks.json');
-		return bookmarks.map(b => ({ id: b.id, ...b }));
+		// Return array as is to maintain physical order
+		return bookmarks.map((b, index) => ({ id: b.id, ...b, _order: index }));
 	},
 	schema: z.object({
 		id: z.string(),
 		category: z.string(),
+		_order: z.number().optional(),
 		items: z.array(z.object({
 			id: z.string(),
 			name: z.string(),
@@ -32,7 +34,8 @@ const bookmarks = defineCollection({
 const projects = defineCollection({
 	loader: async () => {
 		const { projects } = await import('./data/projects.json');
-		return projects.map(p => ({ id: p.id, ...p }));
+		// Add an index-based order to override Astro's default ID-based sorting
+		return projects.map((p, index) => ({ id: p.id, ...p, _order: index }));
 	},
 	schema: z.object({
 		id: z.string(),
@@ -40,7 +43,8 @@ const projects = defineCollection({
 		description: z.string(),
 		language: z.string(),
 		url: z.string(),
-		stars: z.number().optional()
+		stars: z.number().optional(),
+		_order: z.number().optional()
 	})
 });
 
