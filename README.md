@@ -7,7 +7,7 @@ Digital artisan portfolio and technical blog built with **Astro** and **Keystati
 - **框架:** [Astro 6](https://astro.build/) (SSR 模式)
 - **CMS:** [Keystatic Cloud](https://keystatic.io/) (GitHub 托管模式)
 - **样式:** Vanilla CSS + Fraunces & Plus Jakarta Sans 字体
-- **部署:** [Netlify](https://netlify.com/)
+- **部署:** [Vercel](https://vercel.com/)
 - **功能:** Markdown 博客、项目展示、数字书签、关于页面、实时预览
 
 ## 🛠️ 本地开发
@@ -43,11 +43,11 @@ Digital artisan portfolio and technical blog built with **Astro** and **Keystati
 
 ## 🌐 部署说明
 
-项目部署在 Netlify，使用 `@astrojs/netlify` 适配器处理服务端逻辑。
+项目部署在 Vercel，使用 `@astrojs/vercel` 适配器处理服务端逻辑。
 
 - **构建命令:** `pnpm build`
 - **发布目录:** `dist`
-- **环境变量:** 已接入 Keystatic Cloud，不再需要手动管理 GitHub OAuth 密钥。
+
 
 ---
 
