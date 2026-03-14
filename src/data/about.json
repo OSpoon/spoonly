@@ -1,0 +1,31 @@
+{
+	"intro": {
+		"title": "The Architect",
+		"tagline": "Digital artisan building refined web experiences from Beijing.",
+		"bio": [
+			"I am **小鑫同学 (OSpoon)**, a front-end development engineer dedicated to the intersection of code and aesthetics. With a focus on *Vue.js*, *Angular*, and *Node.js*, I build tools that empower developers and simplify complex data.",
+			"My philosophy is simple: technology should be powerful yet invisible. Whether it's an AI interaction tool or a pixel-scaling engine, I strive for technical integrity and visual elegance."
+		]
+	},
+	"experience": [
+		{
+			"period": "2022 — Present",
+			"company": "Senior Front-end Engineer",
+			"description": "Leading the development of NexQuery-AI, focusing on AI-driven natural language interaction and autonomous data analysis systems. Architecting scalable Vue.js applications and cross-browser extension frameworks."
+		},
+		{
+			"period": "2020 — 2022",
+			"company": "Web Application Developer",
+			"description": "Specialized in building complex enterprise dashboards and component libraries using Angular and TypeScript. Focused on performance optimization and pixel-perfect UI implementation."
+		}
+	],
+	"skills": [
+		{ "category": "Core", "items": ["Vue.js", "Angular", "TypeScript", "Node.js"] },
+		{ "category": "Tools", "items": ["Vite", "Webpack", "Astro", "TailwindCSS"] },
+		{ "category": "Expertise", "items": ["Browser Extensions", "UI Components", "Babel Plugins", "Performance"] }
+	],
+	"connect": [
+		{ "name": "GitHub", "url": "https://github.com/OSpoon" },
+		{ "name": "Email", "url": "mailto:ospoon@example.com" }
+	]
+}

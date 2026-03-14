@@ -1,23 +1,322 @@
+---
+interface Props {
+	title?: string;
+}
+
+const { title = "OSpoon's Blog" } = Astro.props;
+
+// Curated list of minimalist ink-wash / zen style images from Unsplash
+const inkWashCollections = [
+	"1578301978693-85fa9c0320b9", // Mist mountains
+	"1508739773434-c26b3d09e071", // Abstract fog
+	"1536431311719-398b6704d4cc", // Monochrome peaks
+	"1523712999610-f77fbcfc3843", // Soft landscape
+	"1470770841072-f978cf4d019e", // Misty hills
+	"1500964757637-c85e8a162699", // Minimalist horizon
+	"1493246507139-91e8fad9978e"  // Water color style
+];
+
+// Select a daily image based on the day of the month
+const today = new Date();
+const imageId = inkWashCollections[today.getDate() % inkWashCollections.length];
+const dailyBgUrl = `url('https://images.unsplash.com/photo-${imageId}?q=80&w=2000&auto=format&fit=crop')`;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title} | OSpoon</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 	</head>
-	<body>
-		<slot />
+	<body style={`--daily-bg: ${dailyBgUrl}`}>
+		<header class="header">
+			<nav class="nav">
+				<div class="logo">
+					<a href="/">OSpoon</a>
+				</div>
+				<div class="links">
+					<a href="/about">About</a>
+					<a href="/projects">Projects</a>
+					<a href="/blog">Blog</a>
+					<a href="/bookmarks">Bookmarks</a>
+				</div>
+			</nav>
+		</header>
+		<main class="container">
+			<slot />
+		</main>
+		<footer class="footer">
+			<p>&copy; {new Date().getFullYear()} OSpoon. Built with elegance.</p>
+		</footer>
+
+		<script is:inline type="module">
+			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+			
+			const renderMermaid = async () => {
+				const preElements = document.querySelectorAll('pre');
+				
+				preElements.forEach(pre => {
+					// Check if it's a mermaid block
+					const text = pre.textContent.trim();
+					if (text.startsWith('graph ') || text.startsWith('flowchart ') || text.startsWith('sequenceDiagram ') || text.startsWith('classDiagram ') || text.startsWith('stateDiagram ') || text.startsWith('erDiagram ') || text.startsWith('gantt ') || text.startsWith('pie ') || text.startsWith('gitGraph ')) {
+						const div = document.createElement('div');
+						div.className = 'mermaid';
+						div.style.textAlign = 'center';
+						div.style.margin = '3rem 0';
+						div.textContent = text;
+						
+						pre.parentNode.replaceChild(div, pre);
+					}
+				});
+
+				mermaid.initialize({ 
+					startOnLoad: true, 
+					theme: 'neutral',
+					fontFamily: 'Plus Jakarta Sans',
+					securityLevel: 'loose',
+					logLevel: 'error'
+				});
+			};
+
+			renderMermaid();
+		</script>
+		<script is:inline>
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", user => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--bg-color: #fdfdfc;
+		--surface-color: #ffffff;
+		--border-color: #e5e5e2;
+		--text-color: #18181b;
+		--text-muted: #71717a;
+		--accent-color: #18181b;
+		--header-bg: rgba(253, 253, 252, 0.7);
+	}
+
+	* {
+		box-sizing: border-box;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	html {
+		height: 100%;
+	}
+
 	body {
 		margin: 0;
+		padding: 0;
+		width: 100%;
+		min-height: 100%;
+		background-color: var(--bg-color);
+		/* Layer 1: The Daily Dynamic Ink Wash Painting */
+		background-image: 
+			var(--daily-bg),
+			radial-gradient(at 0% 0%, rgba(24, 24, 27, 0.02) 0px, transparent 50%),
+			radial-gradient(at 100% 100%, rgba(24, 24, 27, 0.02) 0px, transparent 50%);
+		background-repeat: no-repeat;
+		background-position: bottom center;
+		background-size: cover;
+		background-attachment: fixed;
+		background-blend-mode: luminosity;
+		color: var(--text-color);
+		font-family: 'Plus Jakarta Sans', sans-serif;
+		line-height: 1.6;
+		font-size: 1rem;
+		-webkit-font-smoothing: antialiased;
+	}
+
+	/* Adding an overlay to further fade the ink painting */
+	body::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
+		background: rgba(253, 253, 252, 0.95);
+		z-index: -1;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Fraunces', serif;
+		font-weight: 600; /* Restored to more impactful 600 */
+		letter-spacing: -0.03em;
+		color: var(--text-color);
+		margin-top: 2.5rem;
+		margin-bottom: 1.25rem;
+	}
+
+	h1 { font-size: 2.8rem; line-height: 1.1; }
+	h2 { font-size: 1.8rem; line-height: 1.2; }
+	h3 { font-size: 1.4rem; line-height: 1.2; }
+
+	code, pre {
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.9rem;
+	}
+
+	a {
+		color: var(--accent-color);
+		text-decoration: none;
+		transition: opacity 0.2s ease;
+	}
+
+	a:hover {
+		opacity: 0.6;
+	}
+
+	.container {
+		max-width: 860px;
+		margin: 0 auto;
+		padding: 4rem 1.5rem;
+	}
+
+	.header {
+		position: sticky;
+		top: 0;
+		background-color: var(--header-bg);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid var(--border-color);
+		z-index: 100;
+	}
+
+	.nav {
+		max-width: 860px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 1.25rem 1.5rem;
+	}
+
+	.logo a {
+		font-family: 'Fraunces', serif;
+		font-weight: 700;
+		font-size: 1.5rem;
+		letter-spacing: -0.05em; /* Extra tight logo for premium feel */
+	}
+
+	.links {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.links a {
+		color: var(--text-muted);
+		font-size: 0.85rem;
+		font-weight: 600;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.links a:hover {
+		color: var(--text-color);
+	}
+
+	.footer {
+		text-align: center;
+		padding: 4rem 2rem;
+		border-top: 1px solid var(--border-color);
+		color: var(--text-muted);
+		font-size: 0.8rem;
+		font-family: 'Plus Jakarta Sans', sans-serif;
+	}
+
+	p {
+		margin-bottom: 1.5rem;
+	}
+
+	/* Blog Content Styles */
+	.content {
+		line-height: 1.8;
+		font-size: 1rem;
+	}
+
+	.content h1, .content h2, .content h3, .content h4 {
+		position: relative;
+	}
+
+	.content h1 a, .content h2 a, .content h3 a, .content h4 a {
+		position: absolute;
+		right: 100%;
+		padding-right: 0.5rem;
+		opacity: 0;
+		text-decoration: none;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		font-weight: 300;
+		font-size: 0.8em;
+		transition: opacity 0.2s ease;
+	}
+
+	.content h1:hover a, .content h2:hover a, .content h3:hover a, .content h4:hover a {
+		opacity: 0.5;
+	}
+
+	.content h1 a::after, .content h2 a::after, .content h3 a::after, .content h4 a::after {
+		content: "#";
+	}
+
+	.content blockquote {
+		margin: 2rem 0;
+		padding: 1.5rem 2rem;
+		border-left: 2px solid var(--text-color);
+		background: var(--surface-color);
+		font-family: 'Fraunces', serif;
+		font-style: italic;
+		font-size: 1.2rem;
+		color: var(--text-color);
+	}
+
+	.content table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 2rem 0;
+		font-size: 0.95rem;
+	}
+
+	.content th {
+		text-align: left;
+		padding: 0.75rem;
+		border-bottom: 1px solid var(--text-color);
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.8rem;
+		color: var(--text-muted);
+		text-transform: uppercase;
+	}
+
+	.content td {
+		padding: 0.75rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.content pre {
+		background: var(--surface-color) !important;
+		border: 1px solid var(--border-color);
+		border-radius: 8px;
+		padding: 1.5rem;
+		margin: 2rem 0;
 	}
 </style>

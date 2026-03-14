@@ -1,11 +1,251 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+).slice(0, 3);
+
+const projectsCollection = await getCollection('projects');
+const projects = projectsCollection.slice(0, 3).map(p => p.data);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Home">
+	<section class="hero">
+		<div class="profile">
+			<img src="https://github.com/OSpoon.png" alt="OSpoon" class="avatar" />
+			<div class="bio">
+				<h1>小鑫同学 (OSpoon)</h1>
+				<p class="tagline">Digital Architect | Vue, Angular, TS, Node.js</p>
+				<p class="location">📍 BeiJing, China</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="section-header">
+			<h2>Featured Projects</h2>
+			<a href="/projects" class="view-all">Archive &rarr;</a>
+		</div>
+		<div class="grid">
+			{projects.map(project => (
+				<div class="card">
+					<div class="card-header">
+						<h3><a href={project.url} target="_blank">{project.name}</a></h3>
+					</div>
+					<p>{project.description}</p>
+					<div class="card-footer">
+						<span class="language">
+							<span class={`dot ${project.language.toLowerCase()}`}></span>
+							{project.language}
+						</span>
+					</div>
+				</div>
+			))}
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="section-header">
+			<h2>Latest Thoughts</h2>
+			<a href="/blog" class="view-all">Writings &rarr;</a>
+		</div>
+		<div class="posts-list">
+			{posts.map(post => (
+				<article class="post-item">
+					<div class="post-meta">
+						<time datetime={post.data.pubDate.toISOString()}>
+							{post.data.pubDate.toLocaleDateString('zh-CN', {
+								year: 'numeric',
+								month: 'short',
+								day: 'numeric',
+							})}
+						</time>
+					</div>
+					<div class="post-content">
+						<h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+						<p>{post.data.description}</p>
+					</div>
+				</article>
+			))}
+		</div>
+	</section>
 </Layout>
+
+<style>
+	.hero {
+		padding: 2.5rem 0;
+		border-bottom: 1px solid var(--border-color);
+		margin-bottom: 3rem;
+	}
+
+	.profile {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.avatar {
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		border: 1px solid var(--border-color);
+		transition: transform 0.3s ease;
+	}
+
+	.profile:hover .avatar {
+		transform: scale(1.02);
+	}
+
+	.bio h1 {
+		margin: 0;
+		font-size: 1.85rem;
+		font-family: 'Fraunces', serif;
+	}
+
+	.tagline {
+		color: var(--text-muted);
+		font-size: 0.95rem;
+		margin: 0.4rem 0;
+	}
+
+	.location {
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.section {
+		margin-bottom: 4rem;
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		margin-bottom: 1.5rem;
+	}
+
+	.section-header h2 {
+		margin: 0;
+		font-family: 'Fraunces', serif;
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--text-muted);
+	}
+
+	.view-all {
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		color: var(--text-color);
+	}
+
+	.grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: 2rem;
+	}
+
+	.card {
+		display: flex;
+		flex-direction: column;
+		border-top: 1px solid var(--border-color);
+		padding-top: 1rem;
+		background: transparent !important;
+		transition: transform 0.3s ease;
+	}
+
+	.card:hover {
+		transform: translateY(-4px);
+	}
+
+	.card-header h3 {
+		margin: 0;
+		font-size: 1.25rem;
+		font-family: 'Fraunces', serif;
+	}
+
+	.card p {
+		font-size: 0.85rem;
+		color: var(--text-muted);
+		flex-grow: 1;
+		margin: 0.6rem 0 1rem 0;
+		line-height: 1.6;
+	}
+
+	.card-footer {
+		font-size: 0.75rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+	}
+
+	.language {
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+	}
+
+	.dot.vue { background-color: #41b883; }
+	.dot.typescript { background-color: #3178c6; }
+	.dot.javascript { background-color: #f1e05a; }
+
+	.posts-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.post-item {
+		display: flex;
+		gap: 2.5rem;
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.post-meta {
+		min-width: 90px;
+		color: var(--text-muted);
+		font-size: 0.75rem;
+		font-family: 'JetBrains Mono', monospace;
+		padding-top: 0.4rem;
+	}
+
+	.post-content h3 {
+		margin: 0 0 0.4rem 0;
+		font-size: 1.25rem;
+		font-family: 'Fraunces', serif;
+	}
+
+	.post-content p {
+		margin: 0;
+		font-size: 0.9rem;
+		color: var(--text-muted);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 640px) {
+		.profile {
+			flex-direction: column;
+			text-align: center;
+			gap: 1rem;
+		}
+
+		.post-item {
+			flex-direction: column;
+			gap: 0.4rem;
+		}
+
+		.post-meta {
+			min-width: auto;
+		}
+	}
+</style>
