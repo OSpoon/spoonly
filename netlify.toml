@@ -1,0 +1,16 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+# 处理 Keystatic 的 API 路由
+[[redirects]]
+  from = "/api/keystatic/*"
+  to = "/.netlify/functions/entry"
+  status = 200
+
+# 确保 SPA 路由正常工作
+[[redirects]]
+  from = "/keystatic/*"
+  to = "/keystatic/index.html"
+  status = 200
+  force = false
