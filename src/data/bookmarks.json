@@ -4,25 +4,480 @@
 			"id": "design-inspiration",
 			"category": "Design & Inspiration",
 			"items": [
-				{ "id": "1", "name": "Linear", "url": "https://linear.app", "desc": "The benchmark for modern software design." },
-				{ "id": "2", "name": "Vercel", "url": "https://vercel.com", "desc": "Minimalist cloud platform for frontend development." },
-				{ "id": "3", "name": "Raycast Store", "url": "https://www.raycast.com/store", "desc": "Beautifully crafted community extensions." }
+				{
+					"id": "1",
+					"name": "Linear",
+					"url": "https://linear.app",
+					"desc": "The benchmark for modern software design."
+				},
+				{
+					"id": "2",
+					"name": "Vercel",
+					"url": "https://vercel.com",
+					"desc": "Minimalist cloud platform for frontend development."
+				},
+				{
+					"id": "3",
+					"name": "Raycast Store",
+					"url": "https://www.raycast.com/store",
+					"desc": "Beautifully crafted community extensions."
+				}
 			]
 		},
 		{
 			"id": "dev-tools",
 			"category": "Dev Tools",
 			"items": [
-				{ "id": "4", "name": "Astro Docs", "url": "https://docs.astro.build", "desc": "The framework that powers this site." },
-				{ "id": "5", "name": "Radix UI", "url": "https://www.radix-ui.com", "desc": "Unstyled, accessible components for React." }
+				{
+					"id": "4",
+					"name": "Astro Docs",
+					"url": "https://docs.astro.build",
+					"desc": "The framework that powers this site."
+				},
+				{
+					"id": "5",
+					"name": "Radix UI",
+					"url": "https://www.radix-ui.com",
+					"desc": "Unstyled, accessible components for React."
+				}
 			]
 		},
 		{
 			"id": "ai",
 			"category": "Artificial Intelligence",
 			"items": [
-				{ "id": "6", "name": "Perplexity", "url": "https://www.perplexity.ai", "desc": "An AI-powered search engine that actually works." },
-				{ "id": "7", "name": "Mistral AI", "url": "https://mistral.ai", "desc": "Open and efficient language models from Europe." }
+				{
+					"id": "6",
+					"name": "Perplexity",
+					"url": "https://www.perplexity.ai",
+					"desc": "An AI-powered search engine that actually works."
+				},
+				{
+					"id": "7",
+					"name": "Mistral AI",
+					"url": "https://mistral.ai",
+					"desc": "Open and efficient language models from Europe."
+				}
+			]
+		},
+		{
+			"id": "ospoon",
+			"category": "OSpoon",
+			"items": [
+				{
+					"id": "8",
+					"name": "个人",
+					"url": "https://spoonly.cn/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "9",
+					"name": "掘金",
+					"url": "https://juejin.cn/user/3966693685871694",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "10",
+					"name": "InfoQ",
+					"url": "https://www.infoq.cn/profile/20DDC8B93C7730",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "11",
+					"name": "Github",
+					"url": "https://github.com/OSpoon",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "12",
+					"name": "jsDelivr - A free, fast, and reliable CDN for JS and open source",
+					"url": "https://www.jsdelivr.com/",
+					"desc": "Bookmark from browser"
+				}
+			]
+		},
+		{
+			"id": "documents",
+			"category": "Documents",
+			"items": [
+				{
+					"id": "15",
+					"name": "傀儡师 |傀儡师 --- Puppeteer | Puppeteer",
+					"url": "https://pptr.dev/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "16",
+					"name": "Fast and reliable end-to-end testing for modern web apps | Playwright",
+					"url": "https://playwright.dev/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "17",
+					"name": "Axios 实例 | Axios Docs",
+					"url": "https://axios-http.com/zh/docs/instance",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "18",
+					"name": "Carousel 轮播图 - Naive UI",
+					"url": "https://www.naiveui.com/zh-CN/light/components/carousel",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "19",
+					"name": "首页 | Moment.js 中文文档",
+					"url": "https://momentjs.bootcss.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "20",
+					"name": "ts-morph - Documentation",
+					"url": "https://ts-morph.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "21",
+					"name": "Quick Start Guide - Strapi Developer Docs | Strapi Documentation",
+					"url": "https://docs.strapi.io/dev-docs/quick-start",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "22",
+					"name": "My JSON Server - Fake online REST server for teams",
+					"url": "https://my-json-server.typicode.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "23",
+					"name": "Home | Slidev",
+					"url": "https://cn.sli.dev/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "24",
+					"name": "Preact",
+					"url": "https://preactjs.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "25",
+					"name": "daisyUI — Tailwind CSS Components ( version 4 update is here )",
+					"url": "https://daisyui.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "32",
+					"name": "Google AI Studio",
+					"url": "http://aistudio.google.com/prompts/new_chat",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "33",
+					"name": "RPA-GitLab",
+					"url": "http://10.0.66.174:8080/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "34",
+					"name": "Agent Development Kit",
+					"url": "https://google.github.io/adk-docs/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "35",
+					"name": "Automa",
+					"url": "https://www.automa.site/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "36",
+					"name": "iCraft Editor",
+					"url": "https://icraft.gantcloud.com/zh-CN",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "38",
+					"name": "Gemini 在 Vertex AI 的 Model API  |  生成式 AI 在 Vertex AI  |  Google Cloud --- Gemini in Vertex AI 的 Model API  |  Generative AI on Vertex AI  |  Google Cloud",
+					"url": "https://cloud.google.com/vertex-ai/generative-ai/docs/model-reference/gemini?hl=zh-cn",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "39",
+					"name": "xAI Cloud Console",
+					"url": "https://console.x.ai/team/579e8966-bd50-492e-a6f4-d3c9f68c7c68",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "41",
+					"name": "Mihomo Party",
+					"url": "https://mihomo.party/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "42",
+					"name": "bolt.new",
+					"url": "https://bolt.new/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "43",
+					"name": "cpolar",
+					"url": "https://dashboard.cpolar.com/get-started",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "44",
+					"name": "Cloud Studio",
+					"url": "https://ide.cloud.tencent.com/dashboard/workspace",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "45",
+					"name": "ClackyAI",
+					"url": "https://app.clacky.ai/dashboard",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "46",
+					"name": "md2card.com",
+					"url": "https://md2card.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "47",
+					"name": "Download Sample Videos / Dummy Videos For Demo Use",
+					"url": "https://www.sample-videos.com/index.php#sample-mp4-video",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "53",
+					"name": "Claw Cloud",
+					"url": "https://ap-northeast-1.run.claw.cloud/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "54",
+					"name": "Smallpdf.com - A Free Solution to all your PDF Problems",
+					"url": "https://smallpdf.com/#r=app",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "55",
+					"name": "构建你的组件库 - shadcn/ui 中文站 | shadcnui 文档 | shadcn/ui 中文文档 | shadcn/ui 文档 | shadcnui 中文文档",
+					"url": "https://www.shadcn.com.cn/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "56",
+					"name": "Docker镜像极速下载服务 - 毫秒镜像",
+					"url": "https://1ms.run/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "57",
+					"name": "MacWk - 精品mac软件下载",
+					"url": "https://www.macwk.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "58",
+					"name": "单图音频驱动产品介绍--智能视觉服务-火山引擎",
+					"url": "https://www.volcengine.com/docs/85128/1433887",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "59",
+					"name": "Word 转 Markdown 在线转换器 | 快速、安全、无需上传",
+					"url": "https://www.word2md.net/zh",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "60",
+					"name": "【maker-pdf 文档文字识别（包含ocr），安装使用完整教程】_marker-pdf-CSDN博客",
+					"url": "https://blog.csdn.net/qq_39749966/article/details/148342029?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-148342029-blog-140569870.235^v43^pc_blog_bottom_relevance_base4&spm=1001.2101.3001.4242.3&utm_relevant_index=7",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "61",
+					"name": "vite/packages/vite/src/node/http.ts at bd1e01997d938e03461125679deccf3ecc60b60f · vitejs/vite",
+					"url": "https://github.com/vitejs/vite/blob/bd1e01997d938e03461125679deccf3ecc60b60f/packages/vite/src/node/http.ts",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "62",
+					"name": "Raycast - Store",
+					"url": "https://www.raycast.com/store/trending/2#list",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "63",
+					"name": "自动剪辑神器",
+					"url": "https://autocut.video/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "64",
+					"name": "Free AI Video Generator: Create Videos with AI - HeyGen",
+					"url": "https://www.heygen.com/?sid=rewardful&via=Start-heygen&gad_source=1&gad_campaignid=22832862475&gbraid=0AAAAA_4QCn5sC9zHXSjJNcnWHj87LNzmZ&gclid=EAIaIQobChMI3LKlwMSBjwMV8qdmAh3onQeiEAAYASAAEgIKevD_BwE",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "65",
+					"name": "Battery report",
+					"url": "file:///C:/Users/18252/battery-report.html",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "66",
+					"name": "图片去水印 - 在线图片去水印工具 - 无痕去水印",
+					"url": "https://www.wuhenqushuiyin.com/sub-image-watermark/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "67",
+					"name": "在线抠图软件_图片去除背景 | remove.bg – remove.bg",
+					"url": "https://www.remove.bg/zh",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "68",
+					"name": "Logoly.Pro —— A creative Logo Generator",
+					"url": "https://www.logoly.pro/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "69",
+					"name": "云服务器低价长效特价精选",
+					"url": "https://www.aliyun.com/daily-act/ecs/99program",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "70",
+					"name": "Kling AI: Next-Gen AI Video &amp; AI Image Generator",
+					"url": "https://app.klingai.com/global/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "71",
+					"name": "MateChat - 轻松构建你的AI应用",
+					"url": "https://matechat.gitcode.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "72",
+					"name": "Publishing Extensions · EclipseFdn/open-vsx.org Wiki",
+					"url": "https://github.com/EclipseFdn/open-vsx.org/wiki/Publishing-Extensions",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "73",
+					"name": "Docs",
+					"url": "https://qcn1bkzkxvkc.feishu.cn/drive/folder/AVYufTX5flYVy1dM6mcc7lGdnRD",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "74",
+					"name": "Introduction - Augment",
+					"url": "https://docs.augmentcode.com/introduction",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "75",
+					"name": "屏幕录像 - 精品MAC应用分享",
+					"url": "https://xclient.info/s/t/%E5%B1%8F%E5%B9%95%E5%BD%95%E5%83%8F/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "76",
+					"name": "LLaMA-Factory + Qwen2.5-1.5B-Instruct再微调一次甄嬛 | 俊瑶先森",
+					"url": "https://junyao.tech/posts/7145c09c.html",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "77",
+					"name": "GD音乐台",
+					"url": "https://music.gdstudio.xyz/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "78",
+					"name": "前端面试派",
+					"url": "https://www.mianshipai.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "79",
+					"name": "睿鉴合规平台问题处理",
+					"url": "https://docs.qq.com/sheet/DSGJCbFRCaHZ1eUJR?tab=7hc6po",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "80",
+					"name": "Free Logo Templates | Design.com",
+					"url": "https://www.design.com/maker/logos?text=%E6%B2%89%E6%B5%B8%E5%BC%8F%E5%90%AC%E9%98%85%E8%AF%BB&isFromRootPage=true#show-onboarding-modal",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "81",
+					"name": "Home | mise-en-place",
+					"url": "https://mise.jdx.dev/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "82",
+					"name": "Nano Banana 2 Free - Nano Banana Pro Free AI Image",
+					"url": "https://nanobananafree.ai/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "83",
+					"name": "在线生成圆角图片,PNG|JPG图片转圆角工具 - 吱吱工具箱butterPig",
+					"url": "https://www.butterpig.top/radius",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "84",
+					"name": "量子航空",
+					"url": "https://quantum-air.xyz/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "85",
+					"name": "在 Docker 中启动单节点集群 | Elastic 文档 --- Start a single-node cluster in Docker | Elastic Docs",
+					"url": "https://www.elastic.co/docs/deploy-manage/deploy/self-managed/install-elasticsearch-docker-basic",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "86",
+					"name": "AdonisJS",
+					"url": "https://docs.adonisjs.com/guides/preface/introduction",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "87",
+					"name": "assistant-ui",
+					"url": "https://www.assistant-ui.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "88",
+					"name": "AI SDK",
+					"url": "https://ai-sdk.dev/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "89",
+					"name": "Stitch - Design with AI",
+					"url": "https://stitch.withgoogle.com/",
+					"desc": "Bookmark from browser"
+				},
+				{
+					"id": "90",
+					"name": "iKuuu VPN",
+					"url": "https://ikuuu.de/user",
+					"desc": "Bookmark from browser"
+				}
 			]
 		}
 	]
