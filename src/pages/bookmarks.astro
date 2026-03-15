@@ -1,10 +1,12 @@
 ---
-export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const bookmarkCollection = await getCollection('bookmarks');
-const groups = bookmarkCollection.map(b => b.data);
+// Sort groups by our custom _order field to maintain JSON physical order
+const groups = bookmarkCollection
+	.map(b => b.data)
+	.sort((a, b) => (a._order || 0) - (b._order || 0));
 ---
 
 <Layout title="Bookmarks">
