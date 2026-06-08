@@ -10,7 +10,10 @@ const { intro, experience, skills, connect } = aboutData;
 const bioHtml = typeof intro.bio === 'string' ? await marked.parse(intro.bio) : '';
 ---
 
-<Layout title="About">
+<Layout
+	title="About"
+	description={intro.tagline}
+>
 	<header class="page-header">
 		<h1>{intro.title}</h1>
 		<p>{intro.tagline}</p>

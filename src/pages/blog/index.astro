@@ -7,7 +7,10 @@ const posts = (await getCollection('blog'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Layout title="Blog">
+<Layout
+	title="Blog"
+	description="OSpoon 关于前端开发、AI 工具链和开源项目的技术文章。"
+>
 	<header class="page-header">
 		<h1>Technical Blog</h1>
 		<p>Thoughts on front-end development, AI, and open source.</p>

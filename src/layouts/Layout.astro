@@ -4,9 +4,24 @@ import  Analytics  from '@vercel/analytics/astro';
 
 interface Props {
 	title?: string;
+	description?: string;
+	image?: string;
+	type?: 'website' | 'article';
+	canonical?: string;
 }
 
-const { title = settings.siteName } = Astro.props;
+const {
+	title = settings.siteName,
+	description = settings.description,
+	image,
+	type = 'website',
+	canonical,
+} = Astro.props;
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
+const pageTitle = title === settings.siteName ? settings.siteName : `${title} | ${settings.siteName}`;
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, siteOrigin).toString();
+const ogImage = image ? new URL(image, siteOrigin).toString() : undefined;
+const backgroundImage = (settings as { backgroundImage?: string }).backgroundImage;
 
 // A hand-curated collection of high-aesthetic, minimalist ink-wash style images
 const zenCollection = [
@@ -27,7 +42,7 @@ const today = new Date();
 const imageId = zenCollection[today.getDate() % zenCollection.length];
 const dynamicUnsplashUrl = `https://images.unsplash.com/photo-${imageId}?q=80&w=2000&auto=format&fit=crop`;
 
-const dailyBgUrl = `url('${settings.backgroundImage || dynamicUnsplashUrl}')`;
+const dailyBgUrl = `url('${backgroundImage || dynamicUnsplashUrl}')`;
 ---
 
 <!doctype html>
@@ -37,7 +52,20 @@ const dailyBgUrl = `url('${settings.backgroundImage || dynamicUnsplashUrl}')`;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title} | {settings.siteName}</title>
+		<title>{pageTitle}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="alternate" type="application/rss+xml" title={`${settings.siteName} RSS`} href="/rss.xml" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={settings.siteName} />
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		<meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={description} />
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -67,13 +95,11 @@ const dailyBgUrl = `url('${settings.backgroundImage || dynamicUnsplashUrl}')`;
 		<Analytics />
 
 		<script is:inline type="module">
-			import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-			
 			const renderMermaid = async () => {
 				const preElements = document.querySelectorAll('pre');
+				const mermaidBlocks = [];
 				
 				preElements.forEach(pre => {
-					// Check if it's a mermaid block
 					const text = pre.textContent.trim();
 					if (text.startsWith('graph ') || text.startsWith('flowchart ') || text.startsWith('sequenceDiagram ') || text.startsWith('classDiagram ') || text.startsWith('stateDiagram ') || text.startsWith('erDiagram ') || text.startsWith('gantt ') || text.startsWith('pie ') || text.startsWith('gitGraph ')) {
 						const div = document.createElement('div');
@@ -83,9 +109,15 @@ const dailyBgUrl = `url('${settings.backgroundImage || dynamicUnsplashUrl}')`;
 						div.textContent = text;
 						
 						pre.parentNode.replaceChild(div, pre);
+						mermaidBlocks.push(div);
 					}
 				});
 
+				if (mermaidBlocks.length === 0) {
+					return;
+				}
+
+				const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs');
 				mermaid.initialize({ 
 					startOnLoad: true, 
 					theme: 'neutral',
@@ -316,5 +348,43 @@ const dailyBgUrl = `url('${settings.backgroundImage || dynamicUnsplashUrl}')`;
 		border-radius: 8px;
 		padding: 1.5rem;
 		margin: 2rem 0;
+		overflow-x: auto;
+	}
+
+	.content pre code {
+		font-size: 0.85rem;
+		line-height: 1.7;
+	}
+
+	.content :not(pre) > code {
+		padding: 0.12rem 0.35rem;
+		border: 1px solid var(--border-color);
+		border-radius: 4px;
+		background: var(--surface-color);
+		color: var(--text-color);
+		font-size: 0.85em;
+	}
+
+	@media (max-width: 640px) {
+		.container {
+			padding: 3rem 1.25rem;
+		}
+
+		.nav {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 1rem;
+			padding: 1rem 1.25rem;
+		}
+
+		.links {
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			gap: 0.75rem 1rem;
+		}
+
+		.links a {
+			font-size: 0.72rem;
+		}
 	}
 </style>

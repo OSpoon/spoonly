@@ -2,36 +2,118 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
+export const prerender = true;
+
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	const posts = (await getCollection('blog'))
+		.filter((post) => !post.data.isDraft || import.meta.env.DEV)
+		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
 	return posts.map((post) => ({
 		params: { slug: post.id },
-		props: post,
+		props: {
+			post,
+			posts: posts.map(({ id, data }) => ({
+				id,
+				title: data.title,
+				description: data.description,
+			})),
+		},
 	}));
 }
 
-const post = Astro.props;
-const { Content } = await render(post);
+const { post, posts } = Astro.props;
+const { Content, headings } = await render(post);
+const currentIndex = posts.findIndex((item) => item.id === post.id);
+const newerPost = currentIndex > 0 ? posts[currentIndex - 1] : undefined;
+const olderPost = currentIndex >= 0 && currentIndex < posts.length - 1 ? posts[currentIndex + 1] : undefined;
+const tableOfContents = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const words = (post.body ?? '')
+	.replace(/```[\s\S]*?```/g, '')
+	.replace(/<[^>]+>/g, '')
+	.trim()
+	.split(/\s+/)
+	.filter(Boolean).length;
+const readingMinutes = Math.max(1, Math.ceil(words / 220));
+const formattedPubDate = post.data.pubDate.toLocaleDateString('zh-CN', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+const formattedUpdatedDate = post.data.updatedDate?.toLocaleDateString('zh-CN', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
+const siteOrigin = Astro.site ?? new URL(Astro.url.origin);
+const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const articleJsonLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: post.data.title,
+	description: post.data.description,
+	datePublished: post.data.pubDate.toISOString(),
+	dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+	author: {
+		'@type': 'Person',
+		name: 'OSpoon',
+		url: new URL('/', siteOrigin).toString(),
+	},
+	mainEntityOfPage: canonicalUrl,
+	url: canonicalUrl,
+	...(post.data.heroImage ? { image: new URL(post.data.heroImage, siteOrigin).toString() } : {}),
+}).replace(/</g, '\\u003c');
 ---
 
-<Layout title={post.data.title}>
+<Layout
+	title={post.data.title}
+	description={post.data.description}
+	image={post.data.heroImage}
+	type="article"
+	canonical={canonicalUrl}
+>
+	<script is:inline type="application/ld+json" set:html={articleJsonLd} />
 	<article class="blog-post">
 		<header class="post-header">
-			<time datetime={post.data.pubDate.toISOString()}>
-				{post.data.pubDate.toLocaleDateString('zh-CN', {
-					year: 'numeric',
-					month: 'long',
-					day: 'numeric',
-				})}
-			</time>
+			<div class="post-meta-line">
+				<time datetime={post.data.pubDate.toISOString()}>{formattedPubDate}</time>
+				<span>{readingMinutes} min read</span>
+				{formattedUpdatedDate && <span>Updated {formattedUpdatedDate}</span>}
+			</div>
 			<h1>{post.data.title}</h1>
 			{post.data.description && <p class="description">{post.data.description}</p>}
 			{post.data.heroImage && <img src={post.data.heroImage} alt="" class="hero-image" />}
 		</header>
 		<hr class="divider" />
+		{tableOfContents.length > 0 && (
+			<nav class="toc" aria-label="Table of contents">
+				<h2>Contents</h2>
+				<ol>
+					{tableOfContents.map((heading) => (
+						<li class={`depth-${heading.depth}`}>
+							<a href={`#${heading.slug}`}>{heading.text}</a>
+						</li>
+					))}
+				</ol>
+			</nav>
+		)}
 		<div class="content">
 			<Content />
 		</div>
+		<nav class="post-nav" aria-label="Post navigation">
+			{newerPost ? (
+				<a class="post-nav-link newer" href={`/blog/${newerPost.id}`}>
+					<span>Newer</span>
+					<strong>{newerPost.title}</strong>
+				</a>
+			) : <span />}
+			{olderPost ? (
+				<a class="post-nav-link older" href={`/blog/${olderPost.id}`}>
+					<span>Older</span>
+					<strong>{olderPost.title}</strong>
+				</a>
+			) : <span />}
+		</nav>
 	</article>
 </Layout>
 
@@ -47,10 +129,20 @@ const { Content } = await render(post);
 		margin-bottom: 3rem;
 	}
 
-	.post-header time {
+	.post-meta-line {
+		display: flex;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 0.75rem;
 		color: var(--text-muted);
 		font-family: 'JetBrains Mono', monospace;
-		font-size: 0.9rem;
+		font-size: 0.8rem;
+	}
+
+	.post-meta-line span:not(:first-child)::before {
+		content: "/";
+		margin-right: 0.75rem;
+		color: var(--border-color);
 	}
 
 	.post-header h1 {
@@ -77,5 +169,102 @@ const { Content } = await render(post);
 		border: 0;
 		border-top: 1px solid var(--border-color);
 		margin: 3rem 0;
+	}
+
+	.toc {
+		margin: -1rem 0 3rem;
+		padding: 1.25rem 0;
+		border-bottom: 1px solid var(--border-color);
+	}
+
+	.toc h2 {
+		margin: 0 0 1rem;
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.75rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.toc ol {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.4rem 2rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.toc li {
+		min-width: 0;
+	}
+
+	.toc li.depth-3 {
+		padding-left: 1rem;
+	}
+
+	.toc a {
+		display: block;
+		overflow: hidden;
+		color: var(--text-muted);
+		font-size: 0.85rem;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.toc a:hover {
+		color: var(--text-color);
+	}
+
+	.post-nav {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.5rem;
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--border-color);
+	}
+
+	.post-nav-link {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		min-width: 0;
+	}
+
+	.post-nav-link.older {
+		text-align: right;
+	}
+
+	.post-nav-link span {
+		color: var(--text-muted);
+		font-family: 'JetBrains Mono', monospace;
+		font-size: 0.75rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	.post-nav-link strong {
+		font-family: 'Fraunces', serif;
+		font-size: 1.2rem;
+		line-height: 1.25;
+	}
+
+	@media (max-width: 640px) {
+		.post-header h1 {
+			font-size: 2.2rem;
+		}
+
+		.post-nav {
+			grid-template-columns: 1fr;
+		}
+
+		.toc ol {
+			grid-template-columns: 1fr;
+		}
+
+		.post-nav-link.older {
+			text-align: left;
+		}
 	}
 </style>
