@@ -20,6 +20,30 @@ export default defineConfig({
 		optimizeDeps: {
 			include: ['react', 'react-dom', '@keystatic/core', '@keystatic/core/ui'],
 		},
+		build: {
+			chunkSizeWarningLimit: 3000,
+			rollupOptions: {
+				output: {
+					manualChunks(id) {
+						if (!id.includes('node_modules')) {
+							return;
+						}
+
+						if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) {
+							return 'react-vendor';
+						}
+
+						if (id.includes('@react-aria') || id.includes('@react-stately') || id.includes('@internationalized')) {
+							return 'aria-vendor';
+						}
+
+						if (id.includes('@keystatic')) {
+							return 'keystatic-vendor';
+						}
+					},
+				},
+			},
+		},
 	},
 	markdown: {
 		syntaxHighlight: 'shiki',
